@@ -22,7 +22,7 @@ class ImgixManager extends Manager
     {
         if (isset($this->customCreators[$driver])) {
             return $this->callCustomCreator($driver);
-        } elseif($this->config->has("imgix.sources.{$driver}")) {
+        } elseif ($this->config->has("imgix.sources.{$driver}")) {
             return $this->container->make(
                 UrlBuilder::class,
                 $this->config->get("imgix.sources.{$driver}")
