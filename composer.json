@@ -1,0 +1,58 @@
+{
+    "name": "astrotomic/laravel-imgix",
+    "type": "library",
+    "description": "Laravel bindings and facade to generate imgix URLs.",
+    "keywords": [
+        "astrotomic",
+        "laravel-imgix",
+        "laravel",
+        "imgix",
+        "cdn",
+        "images"
+    ],
+    "homepage": "https://github.com/astrotomic/laravel-imgix",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Witkowski",
+            "email": "gummibeer@astrotomic.info",
+            "homepage": "https://gummibeer.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "illuminate/support": "^7.0 || ^8.0",
+        "imgix/imgix-php": "^3.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0 || ^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Astrotomic\\Imgix\\ImgixServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Astrotomic\\Imgix\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Astrotomic\\Imgix\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
