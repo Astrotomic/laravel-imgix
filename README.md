@@ -33,7 +33,7 @@ The `sources` key contains an array of your sources keyed by the name/identifier
 
 Each source must have a `domain`. The other keys are optional and you can even omit them.
 
-```php 
+```php
 return [
     'default' => 'default',
 
