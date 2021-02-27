@@ -1,14 +1,15 @@
 {
     "name": "astrotomic/laravel-imgix",
     "type": "library",
-    "description": "Laravel bindings and facade to generate imgix URLs.",
+    "description": "Laravel bindings and facade to generate imgix URLs and support for multiple sources.",
     "keywords": [
         "astrotomic",
         "laravel-imgix",
         "laravel",
         "imgix",
         "cdn",
-        "images"
+        "images",
+        "image"
     ],
     "homepage": "https://github.com/astrotomic/laravel-imgix",
     "license": "MIT",
