@@ -9,7 +9,7 @@
 [![StyleCI](https://styleci.io/repos/313743010/shield)](https://styleci.io/repos/313743010)
 [![Total Downloads](https://img.shields.io/packagist/dt/astrotomic/laravel-imgix.svg?label=Downloads&style=flat-square)](https://packagist.org/packages/astrotomic/laravel-imgix)
 
-Laravel bindings and facade to generate [imgix](https://imgix.com) URLs.
+Laravel bindings and facade to generate [imgix](https://imgix.com) URLs and support for multiple sources.
 
 ## Installation
 
@@ -21,11 +21,62 @@ composer require astrotomic/laravel-imgix
 
 ## Configuration
 
-// @ToDo
+First you have to publish the packages configuration file via artisan command.
+
+```bash
+php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider"
+```
+
+After this you will have a `config/imgix.php` file.
+The `default` key which contains the name of your source you want to use by default.
+The `sources` key contains an array of your sources keyed by the name/identifier.
+
+Each source must have a `domain`. The other keys are optional and you can even omit them.
+
+```php 
+return [
+    'default' => 'default',
+
+    'sources' => [
+        'default' => [
+            'domain' => 'example.imgix.net', // domain only - without http(s)
+            // 'useHttps' => true, // default is true - you shouldn't change this
+            // 'signKey' => null, // your signing key for this domain
+            // 'includeLibraryParam' => true, // if you want to remove the `ixlib` param
+        ],
+        'astrotomic' => [
+            'domain' => 'img.astrotomic.info',
+            'useHttps' => true,
+            'signKey' => 'mySecretSignKey',
+            'includeLibraryParam' => false,
+        ],
+    ],
+];
+```
 
 ## Usage
 
-// @ToDo
+The package provides a facade and global function you can use to get the pre-configured `\Imgix\UrlBuilder`.
+
+```php
+use Astrotomic\Imgix\Facades\Imgix;
+
+Imgix::createURL('my/cool/image.jpg');
+// https://example.imgix.net/my/cool/image.jpg?ixlib=php-3.3.0
+
+Imgix::source('astrotomic')->createURL('logo.png');
+// https://img.astrotomic.info/logo.png?s=200c1c2065023265285dcbc4eff99955
+```
+
+If you don't want to import the facade, for example in Blade views, you can use the global function which is an alias to the `Imgix::source()` method.
+
+```php
+imgix()->createURL('my/cool/image.jpg');
+// https://example.imgix.net/my/cool/image.jpg?ixlib=php-3.3.0
+
+imgix('astrotomic')->createURL('logo.png');
+// https://img.astrotomic.info/logo.png?s=200c1c2065023265285dcbc4eff99955
+```
 
 ## Testing
 
