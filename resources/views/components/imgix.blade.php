@@ -6,6 +6,5 @@
         @if($width) width="{{ $width }}" @endif
         @if($height) height="{{ $height }}" @endif
         loading="lazy"
-        {{ $attributes }}
     />
 </picture>

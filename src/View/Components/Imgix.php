@@ -31,14 +31,34 @@ class Imgix extends Component
 
     public function src(): string
     {
-        return $this->imgixManager->source($this->source)->createURL($this->path);
+        $params = [];
+
+        if($this->imgHeight) {
+            $params['h'] = $this->imgHeight;
+        }
+
+        if($this->imgWidth) {
+            $params['w'] = $this->imgWidth;
+        }
+
+        return $this->imgixManager->source($this->source)->createURL($this->path, $params);
     }
 
     public function srcSet(string $format = 'webp'): string
     {
-        return $this->imgixManager->source($this->source)->createSrcSet($this->path, [
+        $params = [
             'fm' => $format,
-        ]);
+        ];
+
+        if($this->imgHeight) {
+            $params['h'] = $this->imgHeight;
+        }
+
+        if($this->imgWidth) {
+            $params['w'] = $this->imgWidth;
+        }
+
+        return $this->imgixManager->source($this->source)->createSrcSet($this->path, $params);
     }
 
     /**
