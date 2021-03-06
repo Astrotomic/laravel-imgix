@@ -2,7 +2,9 @@
 
 namespace Astrotomic\Imgix;
 
+use Astrotomic\Imgix\View\Components\Imgix;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Imgix\UrlBuilder;
 
@@ -13,6 +15,10 @@ class ImgixServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/imgix.php' => config_path('imgix.php'),
         ], 'config');
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'imgix');
+
+        Blade::component('imgix', Imgix::class);
     }
 
     public function register(): void
