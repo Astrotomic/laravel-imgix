@@ -11,15 +11,15 @@ class Imgix extends Component
     protected string $path;
 
     protected ?string $source;
-    protected ?string $imgWidth;
-    protected ?string $imgHeight;
+    protected ?int $imgWidth;
+    protected ?int $imgHeight;
 
     public function __construct(
         ImgixManager $imgixManager,
         string $path,
         ?string $source = null,
-        ?string $width = null,
-        ?string $height = null
+        ?int $width = null,
+        ?int $height = null
     )
     {
         $this->imgixManager = $imgixManager;

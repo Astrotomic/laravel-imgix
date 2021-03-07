@@ -42,7 +42,7 @@ class ImgixViewComponentTest extends TestCase
     public function it_can_set_width_and_height(): void
     {
         $component = new Imgix(
-            resolve(ImgixManager::class), 'my-demo-image.png', 'default', '640', '480'
+            resolve(ImgixManager::class), 'my-demo-image.png', 'default', 640, 480
         );
 
         $this->assertStringContainsString('w=640', $component->src());
