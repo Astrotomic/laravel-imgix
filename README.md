@@ -83,10 +83,10 @@ imgix('astrotomic')->createURL('logo.png');
 There is a Blade component `x-imgix` included in this package:
 
 ```html
-<x-imgix path="my-image.png" />
+<x-imgix path="my-image.png" class="img-class" alt="My fancy image"/>
 ```
 
-**Optinal parameters:**
+**Optional parameters:**
 
 * `source`: use one of the source defined in your `imgix.php` config
 * `width`: define the output width
