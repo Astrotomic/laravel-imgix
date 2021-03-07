@@ -92,6 +92,9 @@ There is a Blade component `x-imgix` included in this package:
 * `width`: define the output width
 * `height`: define the output height
 
+You can publish the view by running
+`php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="views".
+
 ## Testing
 
 ```bash

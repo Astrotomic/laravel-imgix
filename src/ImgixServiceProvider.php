@@ -18,6 +18,10 @@ class ImgixServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'imgix');
 
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/astrotomic/laravel-imgix'),
+        ], 'views');
+
         Blade::component('imgix', Imgix::class);
     }
 
