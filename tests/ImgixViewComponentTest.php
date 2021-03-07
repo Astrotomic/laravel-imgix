@@ -51,4 +51,33 @@ class ImgixViewComponentTest extends TestCase
         $this->assertStringContainsString('w=640', $component->srcSet());
         $this->assertStringContainsString('h=480', $component->srcSet());
     }
+
+    /** @test  */
+    public function it_can_handle_params(): void
+    {
+        $params = [
+            'crop' => 'edges',
+            'fit' => 'crop',
+        ];
+
+        $component = new Imgix(
+            resolve(ImgixManager::class), 'my-demo-image.png', 'default', 640, 480, $params
+        );
+
+        $this->assertStringContainsString('fit=crop', $component->src());
+        $this->assertStringContainsString('crop=edges', $component->src());
+        $this->assertStringContainsString('fit=crop', $component->srcSet());
+        $this->assertStringContainsString('crop=edges', $component->srcSet());
+
+        $params = [];
+
+        $component = new Imgix(
+            resolve(ImgixManager::class), 'my-demo-image.png', 'default', 640, 480, $params
+        );
+
+        $this->assertStringNotContainsString('fit=crop', $component->src());
+        $this->assertStringNotContainsString('crop=edges', $component->src());
+        $this->assertStringNotContainsString('fit=crop', $component->srcSet());
+        $this->assertStringNotContainsString('crop=edges', $component->srcSet());
+    }
 }
