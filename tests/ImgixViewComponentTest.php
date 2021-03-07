@@ -32,10 +32,11 @@ class ImgixViewComponentTest extends TestCase
     {
         $component = new Imgix(resolve(ImgixManager::class), 'my-demo-image.png');
 
-        $this->assertStringContainsString('webp', $component->srcSet());
-        $this->assertStringContainsString('png', $component->srcSet('png'));
-        $this->assertStringContainsString('jpg', $component->srcSet('jpg'));
-        $this->assertStringContainsString('jm2', $component->srcSet('jm2'));
+        $this->assertStringNotContainsString('fm=', $component->srcSet());
+        $this->assertStringContainsString('fm=webp', $component->srcSet('webp'));
+        $this->assertStringContainsString('fm=png', $component->srcSet('png'));
+        $this->assertStringContainsString('fm=jpg', $component->srcSet('jpg'));
+        $this->assertStringContainsString('fm=jm2', $component->srcSet('jm2'));
     }
 
     /** @test  */

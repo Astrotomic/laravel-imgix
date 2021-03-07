@@ -44,11 +44,13 @@ class Imgix extends Component
         return $this->imgixManager->source($this->source)->createURL($this->path, $params);
     }
 
-    public function srcSet(string $format = 'webp'): string
+    public function srcSet(?string $format = null): string
     {
-        $params = [
-            'fm' => $format,
-        ];
+        $params = [];
+
+        if($format) {
+            $params['fm'] = $format;
+        }
 
         if($this->imgHeight) {
             $params['h'] = $this->imgHeight;
