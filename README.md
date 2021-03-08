@@ -68,7 +68,7 @@ Imgix::source('astrotomic')->createURL('logo.png');
 // https://img.astrotomic.info/logo.png?s=200c1c2065023265285dcbc4eff99955
 ```
 
-If you don't want to import the facade, for example in Blade views, you can use the global function which is an alias to the `Imgix::source()` method.
+If you don't want to import the facade, you can use the global function which is an alias to the `Imgix::source()` method.
 
 ```php
 imgix()->createURL('my/cool/image.jpg');
@@ -77,6 +77,23 @@ imgix()->createURL('my/cool/image.jpg');
 imgix('astrotomic')->createURL('logo.png');
 // https://img.astrotomic.info/logo.png?s=200c1c2065023265285dcbc4eff99955
 ```
+
+### Blade component 
+
+There is a Blade component `x-imgix` included in this package:
+
+```html
+<x-imgix path="my-image.png" class="img-class" alt="My fancy image"/>
+```
+
+**Optional parameters:**
+
+* `source`: use one of the source defined in your `imgix.php` config
+* `width`: define the output width
+* `height`: define the output height
+
+You can publish the view by running
+`php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="views".
 
 ## Testing
 
