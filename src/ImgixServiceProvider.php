@@ -24,8 +24,8 @@ class ImgixServiceProvider extends ServiceProvider
             ], 'views');
         }
 
-        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
-            $blade->component('imgix', Imgix::class);
+        $this->callAfterResolving(BladeCompiler::class, static function (BladeCompiler $blade): void {
+            $blade->component(Imgix::class, 'imgix');
         });
     }
 
