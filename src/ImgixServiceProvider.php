@@ -4,7 +4,6 @@ namespace Astrotomic\Imgix;
 
 use Astrotomic\Imgix\View\Components\Imgix;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Imgix\UrlBuilder;
