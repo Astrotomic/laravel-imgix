@@ -3,19 +3,19 @@
 namespace Astrotomic\Imgix\View\Components;
 
 use Astrotomic\Imgix\ImgixManager;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Imgix extends Component implements Renderable, Htmlable
+class Imgix extends Component implements Renderable
 {
-    protected ImgixManager $imgix;
-    protected string $path;
+    public ?int $width = null;
+    public ?int $height = null;
 
+    protected ImgixManager $imgix;
+
+    protected string $path;
     protected ?string $source = null;
-    protected ?int $width = null;
-    protected ?int $height = null;
     protected array $params = [];
 
     public function __construct(
@@ -71,14 +71,6 @@ class Imgix extends Component implements Renderable, Htmlable
 
     public function render(): View
     {
-        return view('imgix::components.imgix', [
-            'width' => $this->width,
-            'height' => $this->height,
-        ]);
-    }
-
-    public function toHtml(): string
-    {
-        return $this->render()->render();
+        return view('imgix::components.imgix');
     }
 }
