@@ -78,19 +78,19 @@ imgix('astrotomic')->createURL('logo.png');
 // https://img.astrotomic.info/logo.png?s=200c1c2065023265285dcbc4eff99955
 ```
 
-### Blade component 
+### Blade component
 
 There is a Blade component `x-imgix` included in this package:
 
 ```html
-<x-imgix path="my-image.png" class="img-class" alt="My fancy image"/>
+<x-imgix path="my-image.png" class="img-class" alt="My fancy image" />
 ```
 
 **Optional parameters:**
 
-* `source`: use one of the source defined in your `imgix.php` config
-* `width`: define the output width
-* `height`: define the output height
+-   `source`: use one of the source defined in your `imgix.php` config
+-   `width`: define the output width
+-   `height`: define the output height
 
 You can publish the view by running
 `php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="views".
