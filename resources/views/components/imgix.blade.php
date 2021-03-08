@@ -1,6 +1,6 @@
-<?php /** @var Illuminate\View\ComponentAttributeBag $attributes */ ?>
-<?php /** @var Closure $src */ ?>
-<?php /** @var Closure $srcSet */ ?>
+<?php /** @var \Illuminate\View\ComponentAttributeBag $attributes */ ?>
+<?php /** @var \Closure $src */ ?>
+<?php /** @var \Closure $srcSet */ ?>
 <?php /** @var int|null $width */ ?>
 <?php /** @var int|null $height */ ?>
 
