@@ -3,87 +3,82 @@
 namespace Astrotomic\Imgix\View\Components;
 
 use Astrotomic\Imgix\ImgixManager;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Imgix extends Component
+class Imgix extends Component implements Renderable, Htmlable
 {
-    protected ImgixManager $imgixManager;
+    protected ImgixManager $imgix;
     protected string $path;
 
-    protected ?string $source;
-    protected ?int $imgWidth;
-    protected ?int $imgHeight;
-    protected ?array $params;
+    protected ?string $source = null;
+    protected ?int $width = null;
+    protected ?int $height = null;
+    protected array $params = [];
 
     public function __construct(
-        ImgixManager $imgixManager,
+        ImgixManager $imgix,
         string $path,
         ?string $source = null,
         ?int $width = null,
         ?int $height = null,
-        ?array $params = null
+        array $params = []
     )
     {
-        $this->imgixManager = $imgixManager;
+        $this->imgix = $imgix;
         $this->path = $path;
         $this->source = $source;
-        $this->imgWidth = $width;
-        $this->imgHeight = $height;
+        $this->width = $width;
+        $this->height = $height;
         $this->params = $params;
     }
 
     public function src(): string
     {
-        $params = [];
+        $params = $this->params;
 
-        if($this->imgHeight) {
-            $params['h'] = $this->imgHeight;
+        if ($this->height) {
+            $params['h'] = $this->height;
         }
 
-        if($this->imgWidth) {
-            $params['w'] = $this->imgWidth;
+        if ($this->width) {
+            $params['w'] = $this->width;
         }
 
-        if($this->params) {
-            $params = $params + $this->params;
-        }
-
-        return $this->imgixManager->source($this->source)->createURL($this->path, $params);
+        return $this->imgix->source($this->source)->createURL($this->path, $params);
     }
 
     public function srcSet(?string $format = null): string
     {
-        $params = [];
+        $params = $this->params;
 
-        if($format) {
+        if ($format) {
             $params['fm'] = $format;
         }
 
-        if($this->imgHeight) {
-            $params['h'] = $this->imgHeight;
+        if ($this->height) {
+            $params['h'] = $this->height;
         }
 
-        if($this->imgWidth) {
-            $params['w'] = $this->imgWidth;
+        if ($this->width) {
+            $params['w'] = $this->width;
         }
 
-        if($this->params) {
-            $params = $params + $this->params;
-        }
-
-        return $this->imgixManager->source($this->source)->createSrcSet($this->path, $params);
+        return $this->imgix->source($this->source)->createSrcSet($this->path, $params);
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
-     */
-    public function render()
+    public function render(): View
     {
         return view('imgix::components.imgix', [
-            'width' => $this->imgWidth,
-            'height' => $this->imgHeight,
+            'width' => $this->width,
+            'height' => $this->height,
         ]);
+    }
+
+    public function toHtml(): string
+    {
+        return $this->render()->render();
     }
 }
