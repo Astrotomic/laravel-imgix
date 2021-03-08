@@ -2,6 +2,7 @@
 
 namespace Astrotomic\Imgix\Tests;
 
+use Gajus\Dindent\Indenter;
 use Illuminate\Support\Facades\View;
 use Astrotomic\Imgix\ImgixServiceProvider;
 use Illuminate\Support\Str;
@@ -12,6 +13,16 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageProviders($app): array
     {
         return [ImgixServiceProvider::class];
+    }
+
+    public function assertBladeRenders(string $expected, string $template, array $data = []): void
+    {
+        $indenter = new Indenter();
+
+        $this->assertSame(
+            $indenter->indent($expected),
+            $indenter->indent((string) $this->blade($template, $data))
+        );
     }
 
     protected function blade(string $template, array $data = []): string
@@ -26,6 +37,6 @@ abstract class TestCase extends OrchestraTestCase
 
         file_put_contents($tempFile, $template);
 
-        return View::make(Str::before(basename($tempFile), '.blade.php'), $data)->render();
+        return view(Str::before(basename($tempFile), '.blade.php'), $data)->render();
     }
 }
