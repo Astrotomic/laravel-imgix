@@ -6,9 +6,13 @@ namespace Astrotomic\Imgix\Tests;
 
 use Astrotomic\Imgix\ImgixManager;
 use Astrotomic\Imgix\View\Components\Imgix;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Spatie\Snapshots\MatchesSnapshots;
 
 class ImgixViewComponentTest extends TestCase
 {
+    use InteractsWithViews, MatchesSnapshots;
+
     /** @test  */
     public function it_can_get_src_with_default_source(): void
     {
@@ -79,5 +83,41 @@ class ImgixViewComponentTest extends TestCase
         $this->assertStringNotContainsString('crop=edges', $component->src());
         $this->assertStringNotContainsString('fit=crop', $component->srcSet());
         $this->assertStringNotContainsString('crop=edges', $component->srcSet());
+    }
+
+    /** @test  */
+    public function it_can_render_component(): void
+    {
+        $result = $this->component(Imgix::class, [
+            'path' => 'wallpaper.png',
+            'width' => 1920,
+            'height' => 1080,
+            'params' => [
+                'fit' => 'crop',
+                'crop' => 'edges',
+            ],
+        ]);
+
+        $this->assertMatchesHtmlSnapshot(strval($result));
+    }
+
+    /** @test  */
+    public function it_can_render_blade_with_component(): void
+    {
+        $result = $this->blade(<<<HTML
+            <div>
+                <x-imgix
+                    path="posts/my-cool-blog-post.png"
+                    width="768"
+                    height="432"
+                    :params="['crop' => 'edges', 'fit' => 'crop']"
+                    class="rounded"
+                    alt="My cool Blog-Post"
+                />
+                <h1>My cool Blog-Post</h1>
+            </div>
+        HTML);
+
+        $this->assertMatchesHtmlSnapshot(strval($result));
     }
 }
