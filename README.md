@@ -24,7 +24,7 @@ composer require astrotomic/laravel-imgix
 First you have to publish the packages configuration file via artisan command.
 
 ```bash
-php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider"
+php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="config"
 ```
 
 After this you will have a `config/imgix.php` file.
@@ -89,11 +89,14 @@ There is a Blade component `x-imgix` included in this package:
 **Optional parameters:**
 
 * `source`: use one of the source defined in your `imgix.php` config
-* `width`: define the output width
-* `height`: define the output height
+* `width`: define the output width - will be added to the params
+* `height`: define the output height - will be added to the params
+* `params`: define the array of params passed to the [Imgix API](https://docs.imgix.com/apis/rendering)
 
 You can publish the view by running
-`php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="views".
+```bash
+php artisan vendor:publish --provider="Astrotomic\Imgix\ImgixServiceProvider" --tag="views"
+```
 
 ## Testing
 
