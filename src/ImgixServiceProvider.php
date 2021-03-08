@@ -6,23 +6,28 @@ use Astrotomic\Imgix\View\Components\Imgix;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use Imgix\UrlBuilder;
 
 class ImgixServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->publishes([
-            __DIR__.'/../config/imgix.php' => config_path('imgix.php'),
-        ], 'config');
-
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'imgix');
 
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/astrotomic/laravel-imgix'),
-        ], 'views');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/imgix.php' => config_path('imgix.php'),
+            ], 'config');
 
-        Blade::component('imgix', Imgix::class);
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/astrotomic/laravel-imgix'),
+            ], 'views');
+        }
+
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            $blade->component('imgix', Imgix::class);
+        });
     }
 
     public function register(): void
