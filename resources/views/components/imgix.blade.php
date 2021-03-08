@@ -5,7 +5,7 @@
 <?php /** @var int|null $height */ ?>
 
 <picture>
-    <source type="image/webp" srcset="{{ $srcSet('webp') }}"/>
+    <source type="image/webp" srcset="{{ $srcSet('webp') }}" />
     <img
         src="{{ $src() }}"
         srcset="{{ $srcSet() }}"

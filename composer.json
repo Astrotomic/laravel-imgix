@@ -31,8 +31,7 @@
     "require-dev": {
         "gajus/dindent": "^2.0",
         "orchestra/testbench": "^5.0 || ^6.0",
-        "phpunit/phpunit": "^9.3",
-        "spatie/phpunit-snapshot-assertions": "^4.2"
+        "phpunit/phpunit": "^9.3"
     },
     "config": {
         "sort-packages": true

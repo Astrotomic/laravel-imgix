@@ -6,12 +6,9 @@ namespace Astrotomic\Imgix\Tests;
 
 use Astrotomic\Imgix\ImgixManager;
 use Astrotomic\Imgix\View\Components\Imgix;
-use Spatie\Snapshots\MatchesSnapshots;
 
 class ImgixViewComponentTest extends TestCase
 {
-    use MatchesSnapshots;
-
     /** @test  */
     public function it_can_get_src_with_default_source(): void
     {
@@ -88,19 +85,43 @@ class ImgixViewComponentTest extends TestCase
     public function it_can_render_blade_with_component(): void
     {
         $html = $this->blade(<<<HTML
-            <div>
-                <x-imgix
-                    path="posts/my-cool-blog-post.png"
+        <x-imgix
+            path="posts/my-cool-blog-post.png"
+            width="768"
+            height="432"
+            :params="['crop' => 'edges', 'fit' => 'crop']"
+            class="rounded"
+            alt="My cool Blog-Post"
+        />
+        HTML);
+
+        $this->assertBladeRenders(
+            <<<HTML
+            <picture>
+                <source
+                    type="image/webp"
+                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=75&amp;w=768 1x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=50&amp;w=768 2x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=35&amp;w=768 3x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=23&amp;w=768 4x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=20&amp;w=768 5x"
+                />
+                <img
+                    src="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;w=768"
+                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=75&amp;w=768 1x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=50&amp;w=768 2x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=35&amp;w=768 3x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=23&amp;w=768 4x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=20&amp;w=768 5x"
                     width="768"
                     height="432"
-                    :params="['crop' => 'edges', 'fit' => 'crop']"
+                    loading="lazy"
                     class="rounded"
                     alt="My cool Blog-Post"
                 />
-                <h1>My cool Blog-Post</h1>
-            </div>
-        HTML);
-
-        $this->assertMatchesHtmlSnapshot($html);
+            </picture>
+            HTML,
+            $html
+        );
     }
 }
