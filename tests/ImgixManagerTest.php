@@ -13,7 +13,7 @@ class ImgixManagerTest extends TestCase
         $imgix = Imgix::source();
 
         $this->assertInstanceOf(UrlBuilder::class, $imgix);
-        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg?ixlib=php-', $imgix->createURL('my/cool/image.jpg'));
+        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg', $imgix->createURL('my/cool/image.jpg'));
     }
 
     /** @test */
@@ -28,6 +28,6 @@ class ImgixManagerTest extends TestCase
     /** @test */
     public function it_can_create_url_with_default_source(): void
     {
-        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg?ixlib=php-', Imgix::createURL('my/cool/image.jpg'));
+        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg', Imgix::createURL('my/cool/image.jpg'));
     }
 }

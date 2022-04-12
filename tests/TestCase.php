@@ -2,9 +2,9 @@
 
 namespace Astrotomic\Imgix\Tests;
 
+use Astrotomic\Imgix\ImgixServiceProvider;
 use Gajus\Dindent\Indenter;
 use Illuminate\Support\Facades\View;
-use Astrotomic\Imgix\ImgixServiceProvider;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
@@ -23,6 +23,13 @@ abstract class TestCase extends OrchestraTestCase
             $indenter->indent($expected),
             $indenter->indent((string) $this->blade($template, $data))
         );
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['imgix.sources.default.includeLibraryParam' => false]);
     }
 
     protected function blade(string $template, array $data = []): string

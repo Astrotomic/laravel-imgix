@@ -84,7 +84,7 @@ class ImgixViewComponentTest extends TestCase
     /** @test  */
     public function it_can_render_blade_with_component(): void
     {
-        $html = $this->blade(<<<HTML
+        $html = $this->blade(<<<'HTML'
         <x-imgix
             path="posts/my-cool-blog-post.png"
             width="768"
@@ -96,23 +96,23 @@ class ImgixViewComponentTest extends TestCase
         HTML);
 
         $this->assertBladeRenders(
-            <<<HTML
+            <<<'HTML'
             <picture>
                 <source
                     type="image/webp"
-                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=75&amp;w=768 1x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=50&amp;w=768 2x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=35&amp;w=768 3x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=23&amp;w=768 4x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;fm=webp&amp;h=432&amp;ixlib=php-3.3.0&amp;q=20&amp;w=768 5x"
+                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;fm=webp&amp;h=432&amp;q=75&amp;w=768 1x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;fm=webp&amp;h=432&amp;q=50&amp;w=768 2x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;fm=webp&amp;h=432&amp;q=35&amp;w=768 3x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;fm=webp&amp;h=432&amp;q=23&amp;w=768 4x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;fm=webp&amp;h=432&amp;q=20&amp;w=768 5x"
                 />
                 <img
-                    src="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;w=768"
-                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=75&amp;w=768 1x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=50&amp;w=768 2x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=35&amp;w=768 3x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=23&amp;w=768 4x,
-            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;h=432&amp;ixlib=php-3.3.0&amp;q=20&amp;w=768 5x"
+                    src="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;fit=crop&amp;h=432&amp;w=768"
+                    srcset="https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=1&amp;fit=crop&amp;h=432&amp;q=75&amp;w=768 1x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=2&amp;fit=crop&amp;h=432&amp;q=50&amp;w=768 2x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=3&amp;fit=crop&amp;h=432&amp;q=35&amp;w=768 3x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=4&amp;fit=crop&amp;h=432&amp;q=23&amp;w=768 4x,
+            https://example.imgix.net/posts/my-cool-blog-post.png?crop=edges&amp;dpr=5&amp;fit=crop&amp;h=432&amp;q=20&amp;w=768 5x"
                     width="768"
                     height="432"
                     loading="lazy"

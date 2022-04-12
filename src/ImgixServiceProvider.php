@@ -12,7 +12,7 @@ class ImgixServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'imgix');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'imgix');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -20,7 +20,7 @@ class ImgixServiceProvider extends ServiceProvider
             ], 'config');
 
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/astrotomic/laravel-imgix'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/astrotomic/laravel-imgix'),
             ], 'views');
         }
 
