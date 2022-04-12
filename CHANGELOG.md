@@ -4,8 +4,8 @@ All notable changes to `laravel-imgix` will be documented in this file
 
 ## v1.0.0 - 2022-04-12
 
-- add Laravel 9 support
-- add PHP 8.1 support
+-   add Laravel 9 support
+-   add PHP 8.1 support
 
 ## v0.2.0 - 2021-03-08
 
