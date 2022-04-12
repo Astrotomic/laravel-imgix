@@ -25,8 +25,7 @@ class Imgix extends Component implements Renderable
         ?int $width = null,
         ?int $height = null,
         array $params = []
-    )
-    {
+    ) {
         $this->imgix = $imgix;
         $this->path = $path;
         $this->source = $source;

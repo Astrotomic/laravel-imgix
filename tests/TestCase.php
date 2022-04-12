@@ -2,9 +2,9 @@
 
 namespace Astrotomic\Imgix\Tests;
 
+use Astrotomic\Imgix\ImgixServiceProvider;
 use Gajus\Dindent\Indenter;
 use Illuminate\Support\Facades\View;
-use Astrotomic\Imgix\ImgixServiceProvider;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 

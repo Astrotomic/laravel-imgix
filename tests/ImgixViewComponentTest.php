@@ -84,7 +84,7 @@ class ImgixViewComponentTest extends TestCase
     /** @test  */
     public function it_can_render_blade_with_component(): void
     {
-        $html = $this->blade(<<<HTML
+        $html = $this->blade(<<<'HTML'
         <x-imgix
             path="posts/my-cool-blog-post.png"
             width="768"
@@ -96,7 +96,7 @@ class ImgixViewComponentTest extends TestCase
         HTML);
 
         $this->assertBladeRenders(
-            <<<HTML
+            <<<'HTML'
             <picture>
                 <source
                     type="image/webp"

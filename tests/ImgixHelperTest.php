@@ -2,7 +2,6 @@
 
 namespace Astrotomic\Imgix\Tests;
 
-use Astrotomic\Imgix\Facades\Imgix;
 use Imgix\UrlBuilder;
 
 class ImgixHelperTest extends TestCase
