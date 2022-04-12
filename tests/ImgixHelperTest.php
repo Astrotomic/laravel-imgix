@@ -12,7 +12,7 @@ class ImgixHelperTest extends TestCase
         $imgix = imgix();
 
         $this->assertInstanceOf(UrlBuilder::class, $imgix);
-        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg?ixlib=php-', $imgix->createURL('my/cool/image.jpg'));
+        $this->assertStringStartsWith('https://example.imgix.net/my/cool/image.jpg', $imgix->createURL('my/cool/image.jpg'));
     }
 
     /** @test */

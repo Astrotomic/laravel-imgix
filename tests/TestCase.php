@@ -25,6 +25,13 @@ abstract class TestCase extends OrchestraTestCase
         );
     }
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config(['imgix.sources.default.includeLibraryParam' => false]);
+    }
+
     protected function blade(string $template, array $data = []): string
     {
         $tempDirectory = sys_get_temp_dir();
