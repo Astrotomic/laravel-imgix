@@ -12,35 +12,46 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [8.2, 8.1, 8.0, 7.4]
-        laravel: [10.*, 9.*, 8.*, 7.*]
+        php: [8.3, 8.2, 8.1, 8.0, 7.4]
+        laravel: ['7.*', '8.*', '9.*', '10.*', '11.*']
         dependency-version: [prefer-lowest, prefer-stable]
         exclude:
+            - php: 7.4
+              laravel: 11.*
             - php: 7.4
               laravel: 10.*
             - php: 7.4
               laravel: 9.*
             - php: 8.0
               laravel: 10.*
+            - php: 8.0
+              laravel: 11.*
+            - php: 8.1
+              laravel: 11.*
+            - php: 8.1
+              laravel: 8.*
+              dependency-version: prefer-lowest
             - php: 8.1
               laravel: 7.*
-            - php: 8.1
+            - php: 8.2
               laravel: 8.*
             - php: 8.2
+              laravel: 7.*
+            - php: 8.3
               laravel: 9.*
-            - php: 8.2
+            - php: 8.3
               laravel: 8.*
-            - php: 8.2
+            - php: 8.3
               laravel: 7.*
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
           key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
@@ -62,3 +73,4 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit
+
